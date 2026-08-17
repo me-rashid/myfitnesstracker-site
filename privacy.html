@@ -1,1 +1,585 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy – MyFitnessTracker</title>
+  <meta name="description" content="Privacy Policy for MyFitnessTracker. No logs, no personal data collected, no accounts required.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #D4AF37;
+      --primary-dim: rgba(212, 175, 55, 0.10);
+      --primary-glow: rgba(212, 175, 55, 0.28);
+      --primary-border: rgba(212, 175, 55, 0.22);
+      --bg: #08080F;
+      --surface: #0F0F1A;
+      --text: #F0F0F8;
+      --muted: #7070A0;
+      --border: #1A1A2E;
+      --border2: #22223A;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,175,55,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(8,8,15,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 30px;
+      height: 30px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-mark svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-logo-text {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .page-header {
+      position: relative;
+      z-index: 1;
+      padding: 140px 24px 64px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .page-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--primary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .page-header h1 {
+      font-family: var(--sans);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+
+    .date-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 4px 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .content-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 24px 100px;
+    }
+
+    .summary-box {
+      background: var(--primary-dim);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 56px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .summary-box .icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .summary-box p {
+      color: var(--text);
+      font-size: 0.91rem;
+      line-height: 1.7;
+    }
+
+    .summary-box strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--primary);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 28px;
+      margin-bottom: 60px;
+    }
+
+    .toc-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--primary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px 20px;
+    }
+
+    .toc li { counter-increment: toc; }
+
+    .toc a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.83rem;
+      transition: color 0.2s;
+    }
+
+    .toc a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--primary);
+      opacity: 0.65;
+      min-width: 22px;
+    }
+
+    .toc a:hover { color: var(--primary); }
+
+    .policy-section {
+      margin-bottom: 48px;
+      scroll-margin-top: 96px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--primary);
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      border-radius: 4px;
+      padding: 3px 10px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .section-head h2 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .policy-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .policy-body p + p { margin-top: 14px; }
+    .policy-body strong { color: var(--text); }
+    .policy-body a { color: var(--primary); text-decoration: none; }
+    .policy-body a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 52px 0;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand-mark {
+      width: 26px;
+      height: 26px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-brand-mark svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .footer-brand-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.83rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-family: var(--mono);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 110px 20px 48px; }
+      .content-wrap { padding: 48px 20px 80px; }
+      .policy-body { padding: 18px 20px; }
+      .toc ol { grid-template-columns: 1fr; }
+      footer { flex-direction: column; padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="nav-logo-text">MyFitnessTracker</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-label">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p>MyFitnessTracker is built around one principle — your activity is your business, not ours.</p>
+    <span class="date-tag">Last updated: May 2025</span>
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="summary-box">
+      <div class="icon">🔒</div>
+      <p>
+        <strong>THE SHORT VERSION</strong>
+        MyFitnessTracker does not collect, store, or sell your personal information. No account is required. We do not log your browsing activity, connection times, or IP addresses. The data needed to route your traffic is used in real time only and is never stored.
+      </p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#s1">Information We Collect</a></li>
+        <li><a href="#s2">How the App Works</a></li>
+        <li><a href="#s3">Permissions We Request</a></li>
+        <li><a href="#s4">Remote Configuration</a></li>
+        <li><a href="#s5">No Activity Logging</a></li>
+        <li><a href="#s6">Third-Party Services</a></li>
+        <li><a href="#s7">Data Retention</a></li>
+        <li><a href="#s8">Children's Privacy</a></li>
+        <li><a href="#s9">Changes to This Policy</a></li>
+        <li><a href="#s10">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <div class="policy-section" id="s1">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Information We Collect</h2>
+      </div>
+      <div class="policy-body">
+        <p>MyFitnessTracker does not collect personally identifiable information. We do not ask for your name, email address, phone number, or any information that identifies you as an individual.</p>
+        <p>No account creation or sign-in is required to use the app. You install it and use it — that's all.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s2">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>How the App Works</h2>
+      </div>
+      <div class="policy-body">
+        <p>MyFitnessTracker helps you track your fitness journey — workouts, meals, and progress — entirely on your own device. All data you enter (food logs, workout sessions, weight entries, habits) is stored locally or in your personal Firebase Firestore database, which is only accessible to you.</p>
+        <p>We do not access or read your data. Your fitness information belongs to you and stays under your control.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s3">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Permissions We Request</h2>
+      </div>
+      <div class="policy-body">
+        <p><strong>Camera</strong> — Required to scan barcodes for food logging and to take photos for meal analysis. The camera is only active when you explicitly use these features.</p>
+        <p><strong>Storage / Media</strong> — Required to select images from your gallery for food photo analysis and to save generated QR codes or exported data.</p>
+        <p><strong>Internet</strong> — Required to sync your data with Firebase (if you choose to use cloud backup) and to fetch barcode information from Open Food Facts or AI services.</p>
+        <p>You can revoke any permission at any time via Android Settings.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s4">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Remote Configuration</h2>
+      </div>
+      <div class="policy-body">
+        <p>The app may fetch a configuration file from our servers when it launches. This configuration includes operational settings and feature flags.</p>
+        <p>This request does not transmit any personal data. The server receives a standard HTTP request from your IP address — the same as any web page load — and responds with the configuration. We do not store or log these requests beyond what is needed to keep the server operational.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s5">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>No Activity Logging</h2>
+      </div>
+      <div class="policy-body">
+        <p>MyFitnessTracker does not log your browsing activity, connection history, session durations, or any websites or services you access.</p>
+        <p>We do not store your IP address, location, or any device identifiers in a way that could be linked to you.</p>
+        <p>We have no way to correlate your real identity with any activity performed while using the app — by design.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s6">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>Third-Party Services</h2>
+      </div>
+      <div class="policy-body">
+        <p>MyFitnessTracker uses the following third-party services to provide core functionality:</p>
+        <p><strong>Firebase (Google)</strong> — Provides authentication, cloud storage, and real-time database capabilities. Your data is stored in your own personal Firebase instance and is not accessible to us. Firebase's data practices are governed by Google's Privacy Policy.</p>
+        <p><strong>Open Food Facts</strong> — Used to look up barcode nutrition information. This is a public database; only the barcode number is sent to their API.</p>
+        <p><strong>Anthropic Claude API</strong> — Used as a fallback for nutrition estimation and barcode-from-image extraction. Images and barcodes are processed temporarily and not stored.</p>
+        <p><strong>RevenueCat</strong> — Used to manage in-app subscriptions. RevenueCat receives a non-personally-identifiable purchase token to verify your subscription status. No personal data is shared.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s7">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2>Data Retention</h2>
+      </div>
+      <div class="policy-body">
+        <p>Because we do not collect personal data, there is no personal data to retain or delete on our end.</p>
+        <p>Any data you choose to store in Firebase (food logs, workouts, progress) is retained in your own Firebase project until you delete it via the app or through the Firebase console.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s8">
+      <div class="section-head">
+        <span class="section-num">08</span>
+        <h2>Children's Privacy</h2>
+      </div>
+      <div class="policy-body">
+        <p>MyFitnessTracker is not directed at children under the age of 13. We do not knowingly collect personal information from any user, including children. Since no personal data is collected, the app presents no specific data privacy risk to younger users.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s9">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2>Changes to This Policy</h2>
+      </div>
+      <div class="policy-body">
+        <p>We may update this Privacy Policy as the app evolves. When we do, we will update the date at the top of this page. We encourage you to review this policy periodically.</p>
+        <p>Continued use of the app after changes are published constitutes your acceptance of the updated policy.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s10">
+      <div class="section-head">
+        <span class="section-num">10</span>
+        <h2>Contact Us</h2>
+      </div>
+      <div class="policy-body">
+        <p>If you have any questions or concerns about this Privacy Policy, please contact us.</p>
+        <p>Email: <a href="mailto:raashidk.official@gmail.com">raashidk.official@gmail.com</a></p>
+        <p>Phone: <a href="tel:+923236258870">+92 323 6258870</a></p>
+        <p>We aim to respond to all privacy-related inquiries within 48 hours.</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="summary-box">
+      <div class="icon">✅</div>
+      <p>MyFitnessTracker helps you track your fitness — and that is the extent of what we do with your data. No profiling. No selling. No logging.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="footer-brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="footer-brand-name">MyFitnessTracker</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="mailto:raashidk.official@gmail.com">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2025 MyFitnessTracker. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
