@@ -1,1 +1,513 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service – MyFitnessTracker</title>
+  <meta name="description" content="Terms of Service for MyFitnessTracker. Rules and responsibilities for using the app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #D4AF37;
+      --primary-dim: rgba(212, 175, 55, 0.10);
+      --primary-glow: rgba(212, 175, 55, 0.28);
+      --primary-border: rgba(212, 175, 55, 0.22);
+      --bg: #08080F;
+      --surface: #0F0F1A;
+      --text: #F0F0F8;
+      --muted: #7070A0;
+      --border: #1A1A2E;
+      --border2: #22223A;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,175,55,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(8,8,15,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 30px; height: 30px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-mark svg {
+      width: 14px; height: 14px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-logo-text { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    .page-header {
+      position: relative;
+      z-index: 1;
+      padding: 140px 24px 64px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 50%;
+      transform: translateX(-50%);
+      width: 90px; height: 2px;
+      background: var(--primary);
+    }
+
+    .page-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--primary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+
+    .date-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 4px 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .content-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 24px 100px;
+    }
+
+    .summary-box {
+      background: var(--primary-dim);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 56px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .summary-box .icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .summary-box p { color: var(--text); font-size: 0.91rem; line-height: 1.7; }
+    .summary-box strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--primary);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 28px;
+      margin-bottom: 60px;
+    }
+
+    .toc-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--primary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px 20px;
+    }
+
+    .toc li { counter-increment: toc; }
+
+    .toc a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.83rem;
+      transition: color 0.2s;
+    }
+
+    .toc a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--primary);
+      opacity: 0.65;
+      min-width: 22px;
+    }
+
+    .toc a:hover { color: var(--primary); }
+
+    .policy-section {
+      margin-bottom: 48px;
+      scroll-margin-top: 96px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--primary);
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      border-radius: 4px;
+      padding: 3px 10px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .section-head h2 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .policy-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .policy-body p + p { margin-top: 14px; }
+    .policy-body strong { color: var(--text); }
+    .policy-body a { color: var(--primary); text-decoration: none; }
+    .policy-body a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 52px 0;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+    .footer-brand-mark {
+      width: 26px; height: 26px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .footer-brand-mark svg { width: 12px; height: 12px; stroke: var(--primary); fill: none; stroke-width: 2; stroke-linecap: round; }
+    .footer-brand-name { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+
+    .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-copy { color: var(--muted); font-size: 0.74rem; font-family: var(--mono); }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 110px 20px 48px; }
+      .content-wrap { padding: 48px 20px 80px; }
+      .policy-body { padding: 18px 20px; }
+      .toc ol { grid-template-columns: 1fr; }
+      footer { flex-direction: column; padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="nav-logo-text">MyFitnessTracker</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-label">Legal</div>
+    <h1>Terms of Service</h1>
+    <p>By downloading or using MyFitnessTracker, you agree to these terms. Please read them carefully.</p>
+    <span class="date-tag">Last updated: May 2025</span>
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="summary-box">
+      <div class="icon">📋</div>
+      <p>
+        <strong>IN SHORT</strong>
+        Use MyFitnessTracker for lawful purposes only. Don't use it for illegal activity. The service is provided as-is. We may update these terms as the app evolves.
+      </p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#t1">Acceptance of Terms</a></li>
+        <li><a href="#t2">Description of Service</a></li>
+        <li><a href="#t3">Acceptable Use</a></li>
+        <li><a href="#t4">Service Availability</a></li>
+        <li><a href="#t5">Intellectual Property</a></li>
+        <li><a href="#t6">Disclaimer of Warranties</a></li>
+        <li><a href="#t7">Limitation of Liability</a></li>
+        <li><a href="#t8">Termination</a></li>
+        <li><a href="#t9">Changes to Terms</a></li>
+        <li><a href="#t10">Contact</a></li>
+      </ol>
+    </div>
+
+    <div class="policy-section" id="t1">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Acceptance of Terms</h2>
+      </div>
+      <div class="policy-body">
+        <p>By downloading, installing, or using MyFitnessTracker ("the App"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the App.</p>
+        <p>These terms apply to all users of the App.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t2">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Description of Service</h2>
+      </div>
+      <div class="policy-body">
+        <p>MyFitnessTracker is a mobile application that helps you track workouts, log meals, and monitor your fitness progress. The App allows you to record exercise sessions, log food intake, track weight and habits, and visualize your progress over time.</p>
+        <p>The App may sync data to Firebase for cloud backup and cross-device access. You are responsible for maintaining the security of your own Firebase account.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t3">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Acceptable Use</h2>
+      </div>
+      <div class="policy-body">
+        <p>You agree to use MyFitnessTracker only for lawful purposes and in a manner that does not infringe the rights of others.</p>
+        <p>You must not use the App to engage in illegal activity of any kind, including but not limited to unauthorized access to computer systems, distributing malware, fraud, or any activity prohibited by the laws of your jurisdiction.</p>
+        <p>You must not attempt to reverse engineer, modify, or tamper with the App or the infrastructure it connects to.</p>
+        <p>We reserve the right to suspend or terminate access for users who violate these terms.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t4">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Service Availability</h2>
+      </div>
+      <div class="policy-body">
+        <p>We aim to maintain consistent availability, but we do not guarantee uninterrupted access to the service. The service may be temporarily unavailable due to maintenance, technical issues, or circumstances beyond our control.</p>
+        <p>Certain network environments may interfere with or block the App's functionality. We cannot guarantee that the service will function in all environments.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t5">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Intellectual Property</h2>
+      </div>
+      <div class="policy-body">
+        <p>The App, including its design, code, and branding, is owned by the developer. All rights reserved.</p>
+        <p>Nothing in these terms grants you any right to the App's source code, intellectual property, or infrastructure beyond the right to use the App as described herein.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t6">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>Disclaimer of Warranties</h2>
+      </div>
+      <div class="policy-body">
+        <p>The App is provided "as is" and "as available" without warranties of any kind, express or implied. We do not warrant that the App will be error-free, uninterrupted, or free from security vulnerabilities.</p>
+        <p>We do not warrant that the App will meet your specific fitness or health goals. Results depend on individual effort and consistency.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t7">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2>Limitation of Liability</h2>
+      </div>
+      <div class="policy-body">
+        <p>To the fullest extent permitted by applicable law, we shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of or inability to use the App, including any interruption to your service or loss of data.</p>
+        <p>We are not responsible for any legal consequences arising from your use of the App in violation of local laws.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t8">
+      <div class="section-head">
+        <span class="section-num">08</span>
+        <h2>Termination</h2>
+      </div>
+      <div class="policy-body">
+        <p>We reserve the right to restrict or terminate access to the App at any time if we have reason to believe you have violated these Terms of Service.</p>
+        <p>You may stop using the App at any time. Uninstalling the App constitutes termination of your use.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t9">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2>Changes to Terms</h2>
+      </div>
+      <div class="policy-body">
+        <p>We may update these Terms of Service from time to time. When we do, we will update the date at the top of this page. Continued use of the App after changes constitutes acceptance of the new terms.</p>
+        <p>We encourage you to review these terms periodically.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="t10">
+      <div class="section-head">
+        <span class="section-num">10</span>
+        <h2>Contact</h2>
+      </div>
+      <div class="policy-body">
+        <p>If you have any questions about these Terms of Service, please contact us.</p>
+        <p>Email: <a href="mailto:raashidk.official@gmail.com">raashidk.official@gmail.com</a></p>
+        <p>Phone: <a href="tel:+923236258870">+92 323 6258870</a></p>
+        <p>We aim to respond within 48 hours.</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="summary-box">
+      <div class="icon">⚖️</div>
+      <p>These terms exist to protect both you and us. Use the app responsibly and we'll keep building it for you.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="footer-brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="footer-brand-name">MyFitnessTracker</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="mailto:raashidk.official@gmail.com">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2025 MyFitnessTracker. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
