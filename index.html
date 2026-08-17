@@ -1,1 +1,526 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyFitnessTracker – Track Workouts, Meals & Progress</title>
+  <meta name="description" content="MyFitnessTracker helps you track workouts, log meals, and monitor your fitness progress — all in one app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #D4AF37;
+      --primary-dim: rgba(212, 175, 55, 0.10);
+      --primary-glow: rgba(212, 175, 55, 0.22);
+      --primary-border: rgba(212, 175, 55, 0.20);
+      --bg: #06060F;
+      --surface: #0F0F1E;
+      --text: #EEEEF8;
+      --sub: #9090B8;
+      --muted: #55557A;
+      --line: #1A1A30;
+      --mono: 'JetBrains Mono', monospace;
+      --display: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--display);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,175,55,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      height: 64px;
+      background: rgba(6,6,15,0.88);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 32px; height: 32px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-mark svg {
+      width: 17px; height: 17px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-wordmark {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--sub);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.18s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 130px 24px 100px;
+    }
+
+    .hero-orb {
+      position: absolute;
+      top: 38%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(212,175,55,0.06) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      border-radius: 100px;
+      padding: 7px 20px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--primary);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+      animation: riseIn 0.55s ease both;
+    }
+
+    .pill-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #34D399;
+      box-shadow: 0 0 10px #34D399;
+      animation: breathe 2.2s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.5); }
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 8.5vw, 6rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+      animation: riseIn 0.55s 0.1s ease both;
+    }
+
+    h1 .pop { color: var(--primary); }
+
+    .hero-kicker {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: #34D399;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      animation: riseIn 0.55s 0.06s ease both;
+    }
+
+    .hero-body {
+      max-width: 500px;
+      color: var(--sub);
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.8;
+      margin-bottom: 52px;
+      animation: riseIn 0.55s 0.18s ease both;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: riseIn 0.55s 0.26s ease both;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 13px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.18s, transform 0.14s;
+    }
+
+    .cta-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    .cta-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 10px;
+      border: 1px solid #2A2A3A;
+      text-decoration: none;
+      transition: border-color 0.18s, color 0.18s, background 0.18s;
+    }
+
+    .cta-ghost:hover {
+      border-color: var(--primary-border);
+      color: var(--primary);
+      background: var(--primary-dim);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 60px;
+      animation: riseIn 0.55s 0.34s ease both;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px 24px;
+      text-align: left;
+      transition: border-color 0.22s, transform 0.18s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary-border);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      color: var(--sub);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .stats-bar {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat-cell {
+      flex: 1;
+      max-width: 230px;
+      padding: 36px 22px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat-cell:last-child { border-right: none; }
+
+    .stat-val {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 7px;
+    }
+
+    .stat-key {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .band {
+      position: relative;
+      z-index: 1;
+      background: #0B0B1A;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 90px 24px;
+      text-align: center;
+    }
+
+    .band-inner { max-width: 640px; margin: 0 auto; }
+    .band-inner p { color: var(--sub); font-size: 1.02rem; line-height: 1.8; margin-bottom: 36px; }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .pill {
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      border-radius: 100px;
+      padding: 7px 17px;
+      font-family: var(--mono);
+      font-size: 0.67rem;
+      color: var(--primary);
+      letter-spacing: 0.06em;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--line);
+      padding: 44px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .foot-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .foot-brand-mark {
+      width: 28px; height: 28px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .foot-brand-mark svg {
+      width: 14px; height: 14px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .foot-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .foot-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .foot-links a {
+      color: var(--sub);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.18s;
+    }
+
+    .foot-links a:hover { color: var(--primary); }
+
+    .foot-copy {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-family: var(--mono);
+    }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 780px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-cell { border-right: none; border-bottom: 1px solid var(--line); max-width: 100%; width: 50%; }
+      footer { flex-direction: column; padding: 32px 20px; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <span class="nav-wordmark">MyFitnessTracker</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+    <li><a href="mailto:raashidk.official@gmail.com">Support</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-pill">
+    <div class="pill-dot"></div>
+    Android App &nbsp;&middot;&nbsp; Free &nbsp;&middot;&nbsp; No Ads
+  </div>
+  <div class="hero-kicker">Track &nbsp;&middot;&nbsp; Log &nbsp;&middot;&nbsp; Progress</div>
+  <h1>Your fitness<br /><span class="pop">journey starts here.</span></h1>
+  <p class="hero-body">MyFitnessTracker helps you track workouts, log meals, and monitor your progress — all in one place. Simple, private, and built for real results.</p>
+  <div class="cta-row">
+    <a href="https://play.google.com/store/apps/details?id=com.myfitnesstracker.app" class="cta-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Get on Play Store
+    </a>
+    <a href="privacy.html" class="cta-ghost">Privacy Policy &rarr;</a>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">💪</div>
+      <h3>Workout Diary</h3>
+      <p>Log your exercises, track sets and reps, and monitor your strength progression over time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🥗</div>
+      <h3>Meal Diary</h3>
+      <p>Log your meals, track calories and macros, and stay on top of your nutrition goals.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>Progress Analytics</h3>
+      <p>Visual charts for weight, calories, workout consistency, and habit tracking.</p>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-cell"><div class="stat-val">3-in-1</div><div class="stat-key">Workouts · Meals · Progress</div></div>
+  <div class="stat-cell"><div class="stat-val">0</div><div class="stat-key">Data collected</div></div>
+  <div class="stat-cell"><div class="stat-val">Free</div><div class="stat-key">Always</div></div>
+  <div class="stat-cell"><div class="stat-val">Private</div><div class="stat-key">By design</div></div>
+</div>
+
+<div class="band">
+  <div class="band-inner">
+    <div style="font-family: var(--mono); font-size: 0.63rem; color: var(--primary); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px;">Privacy first</div>
+    <h2 style="font-size: clamp(1.9rem, 3.8vw, 2.9rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.035em; margin-bottom: 18px;">Your data.<br /><span style="color: var(--primary);">Your device.</span></h2>
+    <p>MyFitnessTracker collects no personal information, requires no account, and logs nothing about your activity. Install it, use it, and stay private.</p>
+    <div class="pills">
+      <span class="pill">No account required</span>
+      <span class="pill">No activity logs</span>
+      <span class="pill">No data sold</span>
+      <span class="pill">No trackers</span>
+      <span class="pill">Offline first</span>
+      <span class="pill">Free to use</span>
+    </div>
+    <a href="privacy.html" class="cta-ghost">Read full privacy policy &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-brand">
+    <div class="foot-brand-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <span class="foot-name">MyFitnessTracker</span>
+  </div>
+  <ul class="foot-links">
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="terms.html">Terms of Service</a></li>
+    <li><a href="mailto:raashidk.official@gmail.com">Support</a></li>
+  </ul>
+  <span class="foot-copy">&copy; 2025 MyFitnessTracker. All rights reserved.</span>
+</footer>
+
+</body>
+</html>
