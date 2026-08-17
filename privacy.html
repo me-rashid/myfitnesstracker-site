@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy – MyFitnessTracker</title>
-  <meta name="description" content="Privacy Policy for MyFitnessTracker. No logs, no personal data collected, no accounts required.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Privacy Policy for MyFitnessTracker. No logs, no personal data collected, no accounts required." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --primary: #D4AF37;
@@ -54,9 +50,7 @@
 
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -75,8 +69,7 @@
     }
 
     .nav-logo-mark {
-      width: 30px;
-      height: 30px;
+      width: 30px; height: 30px;
       border: 1.5px solid var(--primary-border);
       background: var(--primary-dim);
       border-radius: 8px;
@@ -86,8 +79,7 @@
     }
 
     .nav-logo-mark svg {
-      width: 14px;
-      height: 14px;
+      width: 14px; height: 14px;
       stroke: var(--primary);
       fill: none;
       stroke-width: 2;
@@ -95,18 +87,9 @@
       stroke-linejoin: round;
     }
 
-    .nav-logo-text {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text);
-    }
+    .nav-logo-text { font-size: 0.92rem; font-weight: 700; color: var(--text); }
 
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
+    .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
@@ -114,7 +97,6 @@
       font-weight: 500;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--primary); }
 
     .page-header {
@@ -128,11 +110,9 @@
     .page-header::after {
       content: '';
       position: absolute;
-      bottom: -1px;
-      left: 50%;
+      bottom: -1px; left: 50%;
       transform: translateX(-50%);
-      width: 90px;
-      height: 2px;
+      width: 90px; height: 2px;
       background: var(--primary);
     }
 
@@ -146,7 +126,6 @@
     }
 
     .page-header h1 {
-      font-family: var(--sans);
       font-size: clamp(2.2rem, 5vw, 3.4rem);
       font-weight: 800;
       letter-spacing: -0.03em;
@@ -192,18 +171,8 @@
       align-items: flex-start;
     }
 
-    .summary-box .icon {
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .summary-box p {
-      color: var(--text);
-      font-size: 0.91rem;
-      line-height: 1.7;
-    }
-
+    .summary-box .icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .summary-box p { color: var(--text); font-size: 0.91rem; line-height: 1.7; }
     .summary-box strong {
       display: block;
       font-family: var(--mono);
@@ -325,59 +294,21 @@
       gap: 20px;
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
     .footer-brand-mark {
-      width: 26px;
-      height: 26px;
+      width: 26px; height: 26px;
       border: 1.5px solid var(--primary-border);
       background: var(--primary-dim);
       border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
+    .footer-brand-mark svg { width: 12px; height: 12px; stroke: var(--primary); fill: none; stroke-width: 2; stroke-linecap: round; }
+    .footer-brand-name { font-size: 0.9rem; font-weight: 700; color: var(--text); }
 
-    .footer-brand-mark svg {
-      width: 12px;
-      height: 12px;
-      stroke: var(--primary);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-    }
-
-    .footer-brand-name {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      list-style: none;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.83rem;
-      transition: color 0.2s;
-    }
-
+    .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
     .footer-links a:hover { color: var(--primary); }
-
-    .footer-copy {
-      color: var(--muted);
-      font-size: 0.74rem;
-      font-family: var(--mono);
-    }
+    .footer-copy { color: var(--muted); font-size: 0.74rem; font-family: var(--mono); }
 
     @media (max-width: 640px) {
       nav { padding: 14px 20px; }
