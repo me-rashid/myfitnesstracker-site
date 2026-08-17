@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Deletion – MyFitnessTracker</title>
+  <meta name="description" content="How to delete your data from MyFitnessTracker. You are always in complete control." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #D4AF37;
+      --primary-dim: rgba(212, 175, 55, 0.10);
+      --primary-border: rgba(212, 175, 55, 0.22);
+      --bg: #08080F;
+      --surface: #0F0F1A;
+      --text: #F0F0F8;
+      --muted: #7070A0;
+      --border: #1A1A2E;
+      --border2: #22223A;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,175,55,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(8,8,15,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 30px; height: 30px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-mark svg {
+      width: 14px; height: 14px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-logo-text { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    .page-header {
+      position: relative;
+      z-index: 1;
+      padding: 140px 24px 64px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 50%;
+      transform: translateX(-50%);
+      width: 90px; height: 2px;
+      background: var(--primary);
+    }
+
+    .page-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--primary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+
+    .date-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 4px 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .content-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 24px 100px;
+    }
+
+    .summary-box {
+      background: var(--primary-dim);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 56px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .summary-box .icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .summary-box p { color: var(--text); font-size: 0.91rem; line-height: 1.7; }
+    .summary-box strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--primary);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .section-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--primary);
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      border-radius: 4px;
+      padding: 3px 10px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .section-card-header h2 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .section-card-body {
+      padding: 24px 28px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .section-card-body p + p { margin-top: 14px; }
+    .section-card-body strong { color: var(--text); }
+    .section-card-body a { color: var(--primary); text-decoration: none; }
+    .section-card-body a:hover { text-decoration: underline; }
+
+    .steps {
+      list-style: none;
+      counter-reset: steps;
+      margin-top: 16px;
+    }
+
+    .steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .steps li::before {
+      content: counter(steps);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--primary);
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .steps li span { color: var(--muted); font-size: 0.9rem; }
+
+    .email-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      text-align: center;
+      margin-top: 52px;
+    }
+
+    .email-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .email-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: #08080F;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 28px rgba(212, 175, 55, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .email-note {
+      display: block;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      margin-top: 14px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 52px 0;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+    .footer-brand-mark {
+      width: 26px; height: 26px;
+      border: 1.5px solid var(--primary-border);
+      background: var(--primary-dim);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .footer-brand-mark svg { width: 12px; height: 12px; stroke: var(--primary); fill: none; stroke-width: 2; stroke-linecap: round; }
+    .footer-brand-name { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+
+    .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-copy { color: var(--muted); font-size: 0.74rem; font-family: var(--mono); }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 110px 20px 48px; }
+      .content-wrap { padding: 48px 20px 80px; }
+      .section-card-body { padding: 18px 20px; }
+      .section-card-header { padding: 16px 20px; }
+      footer { flex-direction: column; padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="nav-logo-text">MyFitnessTracker</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="deletion.html">Data Deletion</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-label">User Rights</div>
+    <h1>Data Deletion</h1>
+    <p>How to delete your data from MyFitnessTracker. You are always in complete control.</p>
+    <span class="date-tag">Last updated: May 2025</span>
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="summary-box">
+      <div class="icon">🛡</div>
+      <div>
+        <strong>KEY FACT</strong>
+        <p>MyFitnessTracker stores all data locally on your device or in your personal Firebase database. There are no user accounts, no cloud databases that we control, and no servers that hold your information. This means you can delete all your data instantly, at any time, directly from within the app or by uninstalling it.</p>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-num">01</span>
+        <h2>What Data MyFitnessTracker Stores</h2>
+      </div>
+      <div class="section-card-body">
+        <p><strong style="color: var(--text);">On your device (local only):</strong></p>
+        <p><strong>Food Logs</strong> — Meals you've logged are stored in a local SQLite database on your device.</p>
+        <p><strong>Workout Sessions</strong> — Exercise history, sets, reps, and weights are stored locally.</p>
+        <p><strong>Weight Entries</strong> — Your weight tracking history is stored locally.</p>
+        <p><strong>Habit Data</strong> — Wellness habits and streaks are stored locally.</p>
+        <p><strong>App Preferences</strong> — Settings, theme preferences, and goals are stored locally.</p>
+        <br />
+        <p><strong style="color: var(--text);">In Firebase (optional cloud backup):</strong></p>
+        <p>If you choose to use cloud sync, your data is stored in your own personal Firebase Firestore instance. This data is only accessible to you and is not visible to us.</p>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-num">02</span>
+        <h2>Deleting Data From Inside the App</h2>
+      </div>
+      <div class="section-card-body">
+        <p style="color: var(--text); font-weight: 500; font-size: 0.88rem; margin-bottom: 12px;">TO DELETE INDIVIDUAL FOOD ITEMS:</p>
+        <ol class="steps">
+          <li><span>Open the app and go to the <strong style="color:var(--text)">Meal Diary</strong> screen.</span></li>
+          <li><span>Find the food item you want to delete.</span></li>
+          <li><span>Tap the <strong style="color:var(--text)">delete icon</strong> or swipe left on the item to remove it.</span></li>
+        </ol>
+        <br />
+        <p style="color: var(--text); font-weight: 500; font-size: 0.88rem; margin-bottom: 12px;">TO DELETE INDIVIDUAL WORKOUT SESSIONS:</p>
+        <ol class="steps">
+          <li><span>Open the app and go to the <strong style="color:var(--text)">Workout Diary</strong> screen.</span></li>
+          <li><span>Tap <strong style="color:var(--text)">View History</strong> on any exercise.</span></li>
+          <li><span>Find the session you want to delete and use the delete option.</span></li>
+        </ol>
+        <br />
+        <p style="color: var(--text); font-weight: 500; font-size: 0.88rem; margin-bottom: 12px;">TO DELETE WEIGHT ENTRIES:</p>
+        <ol class="steps">
+          <li><span>Open the app and go to the <strong style="color:var(--text)">Progress</strong> screen.</span></li>
+          <li><span>Your weight history is shown in the chart. Individual entries can be deleted from the weight log.</span></li>
+        </ol>
+        <br />
+        <p style="color: var(--text); font-weight: 500; font-size: 0.88rem; margin-bottom: 12px;">TO CLEAR ALL SCAN HISTORY:</p>
+        <ol class="steps">
+          <li><span>Open the app and go to <strong style="color:var(--text)">Settings</strong>.</span></li>
+          <li><span>Tap <strong style="color:var(--text)">Clear History</strong> or <strong style="color:var(--text)">Clear All Data</strong>.</span></li>
+          <li><span>Confirm the deletion. This removes all local data permanently.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-num">03</span>
+        <h2>Deleting All Data by Uninstalling</h2>
+      </div>
+      <div class="section-card-body">
+        <p>Uninstalling MyFitnessTracker from your device will permanently delete all locally stored data, including all food logs, workout history, weight entries, habits, and app settings.</p>
+        <p>If you have cloud sync enabled, your data will remain in your personal Firebase instance. You can delete it from there, or it will be automatically removed after 30 days of inactivity.</p>
+        <ol class="steps" style="margin-top: 16px;">
+          <li><span>Long-press the MyFitnessTracker icon on your home screen or app drawer.</span></li>
+          <li><span>Tap <strong style="color:var(--text)">Uninstall</strong> and confirm.</span></li>
+          <li><span>All local data is permanently erased.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-num">04</span>
+        <h2>Clearing App Data via Android Settings</h2>
+      </div>
+      <div class="section-card-body">
+        <p>You can also clear all stored data without uninstalling the app through Android's built-in storage settings:</p>
+        <ol class="steps" style="margin-top: 12px;">
+          <li><span>Go to your device's <strong style="color:var(--text)">Settings → Apps</strong>.</span></li>
+          <li><span>Find and tap <strong style="color:var(--text)">MyFitnessTracker</strong>.</span></li>
+          <li><span>Tap <strong style="color:var(--text)">Storage</strong>.</span></li>
+          <li><span>Tap <strong style="color:var(--text)">Clear Data</strong>. This permanently deletes all local app data.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-num">05</span>
+        <h2>Deleting Firebase Cloud Data</h2>
+      </div>
+      <div class="section-card-body">
+        <p>If you have enabled cloud sync, your data is stored in your own personal Firebase instance. To delete this data:</p>
+        <ol class="steps" style="margin-top: 12px;">
+          <li><span>Log in to the <strong style="color:var(--text)">Firebase Console</strong>.</span></li>
+          <li><span>Navigate to your project's <strong style="color:var(--text)">Firestore Database</strong>.</span></li>
+          <li><span>Delete the collections associated with your user ID.</span></li>
+          <li><span>Alternatively, uninstalling the app and not using it for 30 days will auto-clean your data.</span></li>
+        </ol>
+        <br />
+        <p>If you need assistance, contact us and we can help guide you through the process.</p>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-card-header">
+        <span class="section-num">06</span>
+        <h2>No Account or Personal Data Stored by Us</h2>
+      </div>
+      <div class="section-card-body">
+        <p>MyFitnessTracker does not require an account and does not collect personal information. There is no user profile, no cloud-synced data we control, and no database entry associated with you personally on our servers.</p>
+        <p>The steps above cover all data that MyFitnessTracker stores. You are always in complete control of your information.</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="email-card">
+      <h3>Need help with data deletion?</h3>
+      <p>If you have any concerns or questions about your data, contact us. We respond within 48 hours.</p>
+      <a href="mailto:raashidk.official@gmail.com?subject=MyFitnessTracker%20Data%20Deletion%20Request" class="btn-primary">
+        ✉ &nbsp;Contact Support
+      </a>
+      <span class="email-note">raashidk.official@gmail.com</span>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="footer-brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="footer-brand-name">MyFitnessTracker</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="deletion.html">Data Deletion</a></li>
+      <li><a href="mailto:raashidk.official@gmail.com">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2025 MyFitnessTracker. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
